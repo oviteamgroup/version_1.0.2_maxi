@@ -22,13 +22,13 @@ const AppNavigation = createStackNavigator({
         }
     },
     Login:{
-        screen: TestingSwipeScreen,
+        screen: LoginScreen,
         navigationOptions: {
             headerShown: false,
         }
     },
-    TestingSwipeScreen:{
-        screen: LoginScreen,
+    TestingSwipe:{
+        screen: TestingSwipeScreen,
         navigationOptions: {
             headerShown: false,
         }

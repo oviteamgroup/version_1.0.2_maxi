@@ -1,4 +1,4 @@
-import AsyncStorage from '@react-native-community/async-storage'
+/*import AsyncStorage from '@react-native-community/async-storage'
 
 const USUARIO_KEY = '@usuario:key' //SE ALMACENA UN USUARIO
 
@@ -36,4 +36,4 @@ async function deleteUsuario(){ //funcion para eliminar usuarios
     }
 }
 
-export {saveUsuario, getUsuario, deleteUsuario} //exportamos las funciones
+export {saveUsuario, getUsuario, deleteUsuario} //exportamos las funciones*/

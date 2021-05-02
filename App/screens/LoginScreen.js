@@ -12,20 +12,10 @@ import { mainStyles, loginStyles, registroStyles } from '@styles/styles'
 import MyTextInput from '@components/MyTextInput'
 import MyButton from '@components/MyButton'
 import color from '@styles/colors'
-import { UsuarioContext } from '@context/UsuarioContext'
 import { SocialIcon } from 'react-native-elements'
 import * as Facebook from "expo-facebook";
-//import Snackbar from 'react-native-snackbar'
-
-//FUNCION PARA NAVEGAR ENTRE PANTALLAS, RECIBE EL PROPS Y EL NOMBRE DE LA SCREEN A LA QUE NOS QUEREMOS MOVER
-function goToScreen(props, routeName) {
-  props.navigation.navigate(routeName)
-}
 
 export default function LoginScreen(props) {
-  //hidePassword se encarga de ocultar las contraseñas cuando se clickea el icono del ojito
-  const [login, loginAction] = useContext(UsuarioContext)
-
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [hidePassword, sedHidePassword] = useState(false)
@@ -48,6 +38,7 @@ export default function LoginScreen(props) {
         // console.log((await response.json()).name);
         const data = await response.json();
         setUser(data);
+        goToScreen(props, 'Principal')
       } else {
         // type === 'cancel'
       }
@@ -55,8 +46,6 @@ export default function LoginScreen(props) {
       alert(`Facebook Login Error: ${message}`);
     }
   };
-
-
   //ESTRUCTURA DE LA LOGINSCREEN=======================================
   return (
     <ScrollView
@@ -79,14 +68,12 @@ export default function LoginScreen(props) {
           value={password} onChangeText={(password) => setPassword(password)} />
         <MyButton
           titulo='Iniciar Sesión'
-          onPress={()=> iniciarSesion()}
-        />
+          onPress={() => goToScreen(props, 'TestingSwipe')} />
         <View>
           <TouchableOpacity onPress={() => goToScreen(props, 'RecuperarPassword')}>
             <Text style={[mainStyles.txtTransparent, { textDecorationLine: 'underline' }]}>Olvide mi Contraseña</Text>
           </TouchableOpacity>
         </View>
-
         <View style={registroStyles.containerSocial}>
           <SocialIcon
             style={registroStyles.buttonSocialIcon}
@@ -100,23 +87,15 @@ export default function LoginScreen(props) {
             title='Iniciar con Google'
             button
             type='google-plus-official'
+            onPress={() => goToScreen(props, 'Principal')}
           />
         </View>
-
       </View>
     </ScrollView>
-
   )
-  function iniciarSesion() {
-    loginAction({
-      type: 'sign', data: {
-        email, password
-      }
-    })
-    goToScreen('Drawer')
-  }
-
-  function goToScreen(routeName) {
-    props.navigation.navigate(routeName)
-  }
+}
+//FUNCION PARA NAVEGAR ENTRE PANTALLAS,
+//RECIBE EL PROPS Y EL NOMBRE DE LA SCREEN A LA QUE NOS QUEREMOS MOVER
+function goToScreen(props, routeName) {
+  props.navigation.navigate(routeName)
 }
